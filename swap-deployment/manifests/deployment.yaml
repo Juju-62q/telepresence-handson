@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: handson
+  name: handson
+spec:
+  selector:
+    matchLabels:
+      run: handson
+  template:
+    metadata:
+      labels:
+        run: handson
+    spec:
+      containers:
+      - image: nginx
+        name: handson
+        ports:
+        - containerPort: 80

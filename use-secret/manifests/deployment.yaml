@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: handson
+  name: handson
+spec:
+  selector:
+    matchLabels:
+      run: handson
+  template:
+    metadata:
+      labels:
+        run: handson
+    spec:
+      containers:
+      - image: juju62q/telepresence-handson:secret-test
+        imagePullPolicy: Always
+        name: handson
+        ports:
+        - containerPort: 80
+        env:
+        - name: MY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: my-secret
+        - name: MY_CONFIG
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: my-configmap
