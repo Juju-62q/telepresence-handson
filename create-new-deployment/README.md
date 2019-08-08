@@ -3,25 +3,42 @@
 kubectl apply -f manifests/
 ```
 
+確認
+```
+kubectl get all
+```
+`service/secret`, `deployment.apps/secret` があればOK
+
 ## use Telepresence
 
 Deoloymentを追加する
 ```
-cd new_deploy
-docker build . -t new_deploy
-telepresence --new-deployment new-deploy --docker-run --rm -p 80:80 -e APP_B_ENDPOINT="http://secret/secret" new_deploy
+cd new_app
+docker build . -t new_app
+telepresence --new-deployment new-app --expose 80:80 --docker-run --rm -p 80:80 -e APP_B_ENDPOINT="http://secret" new_app 
 ```
-手元にSecretリソースがなくても変更後のコンテナがSecretリソースにアクセスできていることを確認する．
 
-dockerコマンドで環境変数の書き換える．
+別タブでリソースの変化を確認する
 ```
-telepresence --swap-deployment handson --docker-run --rm -p 80:80 -e MY_SECRET=new_secret secret
+kubectl get all
 ```
-localで，変数を変更して試すことができる．
 
-ファイル読み込みでも同じようにアクセス可能なのできになる人は試してみるといいかも？
+deployment, replicaset, pod, serviceにnew-appが追加されていることが確認できる。
+
+K8sのCoreDNSで名前解決をしながら疎通してみる
+```
+telepresence --run curl http://new-app
+```
+
+下記のようなレスポンスが確認できる
+```
+{"message":"this is added!","secret":"secret is secret"}
+```
+
+これでtelepresenceでクラスタに自在にアクセスできることや、新しいdeploymentを作ることができるということがわかった。
 
 ## Cleanup
 ```
+cd ..
 kubectl delete -f manifests/
 ```

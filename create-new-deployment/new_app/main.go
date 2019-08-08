@@ -45,8 +45,8 @@ func main() {
 
 		c.JSON(200, gin.H{
 			"message": "this is added!",
-      "secret": secretResponse.Secret,
+			"secret":  secretResponse.Secret,
 		})
 	})
-  r.Run(":80") // listen and serve on 0.0.0.0:8080
+	r.Run(":80") // listen and serve on 0.0.0.0:8080
 }
