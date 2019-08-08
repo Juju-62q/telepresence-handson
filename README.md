@@ -2,6 +2,8 @@
 
 資料は下記
 
+https://speakerdeck.com/juju62q/telepresence-handson
+
 ## 前提
 
 基本Mac  

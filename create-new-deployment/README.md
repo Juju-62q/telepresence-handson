@@ -15,7 +15,7 @@ Deoloymentを追加する
 ```
 cd new_app
 docker build . -t new_app
-telepresence --new-deployment new-app --expose 80:80 --docker-run --rm -p 80:80 -e APP_B_ENDPOINT="http://secret" new_app 
+telepresence --new-deployment new-app --expose 80:80 --docker-run --rm -p 80:80 -e APP_B_ENDPOINT="http://secret" new_app
 ```
 
 別タブでリソースの変化を確認する
@@ -23,7 +23,7 @@ telepresence --new-deployment new-app --expose 80:80 --docker-run --rm -p 80:80 
 kubectl get all
 ```
 
-deployment, replicaset, pod, serviceにnew-appが追加されていることが確認できる。
+deployment, replicaset, pod, serviceにnew-appが追加されていることが確認できる．
 
 K8sのCoreDNSで名前解決をしながら疎通してみる
 ```
@@ -35,7 +35,13 @@ telepresence --run curl http://new-app
 {"message":"this is added!","secret":"secret is secret"}
 ```
 
-これでtelepresenceでクラスタに自在にアクセスできることや、新しいdeploymentを作ることができるということがわかった。
+これでtelepresenceでクラスタに自在にアクセスできることや，新しいdeploymentを作ることができるということがわかった．
+
+Telepresenceを止めてリソース確認すると
+```
+kubectl get all
+```
+deployment, replicaset, pod, serviceからnew-appは削除されている．
 
 ## Cleanup
 ```

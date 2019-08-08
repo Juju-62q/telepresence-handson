@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Secret struct {
+type secret struct {
 	Secret string `json:"secret"`
 }
 
@@ -36,7 +36,7 @@ func main() {
 			return
 		}
 
-		var secretResponse Secret
+		var secretResponse secret
 		err = json.Unmarshal(body, &secretResponse)
 		if err != nil {
 			log.Fatal(err)
