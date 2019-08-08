@@ -12,7 +12,7 @@ handsonのEXTERNAL IPにアクセスする．
 ```
 http://${EXTERNAL IP}/secret
 {"secret": "secret is secret"}
-http://${EXTERNAL IP}/configmap
+http://${EXTERNAL IP}/config
 {"config": "configmap is configmap"}
 ```
 
